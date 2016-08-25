@@ -1,0 +1,749 @@
+<!doctype html>
+<html>
+    
+<!-- Mirrored from 67.227.189.112/~rtvnews24/templates/rtv-v1/ajax/most_viewed_news.php?cat_id=54 by HTTrack Website Copier/3.x [XR&CO'2008], Thu, 04 Aug 2016 08:12:37 GMT -->
+<head><title>RTV Online Newspaper</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">    
+<meta name="Developed By" content="orangebd.com"/>
+<meta name="keywords" content=""/>
+<meta name="distribution" content="Global"/>
+<meta name="description" content=""/>
+<meta name="robots" content="ALL"/>
+<meta name="robots" content="index, follow"/>
+<meta name="googlebot" content="index, follow"/>
+<meta http-equiv="refresh" content="1000"/>
+<link rel="icon" href="http://67.227.189.112/~rtvnews24/favicon.ico" type="image/x-icon" />
+<link rel="image_src" href="http://67.227.189.112/~rtvnews24/amadershomoy-facebook.jpg" />
+<script>if(top.location!= self.location) {top.location = self.location.href}</script>
+<link rel="stylesheet" href="http://67.227.189.112/~rtvnews24/assets/css/bootstrap-3.3.0.min.css" media="all">
+<link rel="stylesheet" href="http://67.227.189.112/~rtvnews24/assets/css/jasny-bootstrap.min.css" media="all">
+<link rel="stylesheet" href="http://67.227.189.112/~rtvnews24/assets/css/font-awesome-4.2.0.min.css" media="all">
+<link rel="stylesheet" href="http://67.227.189.112/~rtvnews24/templates/rtv-v1/css/style-1.0.css" media="all">
+<link rel="stylesheet" href="http://67.227.189.112/~rtvnews24/lib/opinion-poll/simple_poll.css" media="all"> 
+
+<style type="text/css">
+	.navbar-toggle {
+	    float: left;
+	    margin-left: 15px;
+	}
+	.navmenu, .navbar-offcanvas {
+	    width: 300px;
+	    height: auto;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-radius: 4px;
+	}
+	.navmenu-fixed-left, .navmenu-fixed-right, .navbar-offcanvas {
+	    position: fixed;
+	    z-index: 1050;
+	    top: 0;
+	    bottom: 0;
+	    overflow-y: auto;
+	    border-radius: 0;
+	}
+	.navmenu-fixed-left, .navbar-offcanvas.navmenu-fixed-left {
+	    left: 0;
+	    right: auto;
+	    border-width: 0 1px 0 0;
+	}
+	.navmenu-default, .navbar-default .navbar-offcanvas {
+	    background-color: #f8f8f8;
+	    border-color: #e7e7e7;
+	}
+	.offcanvas {
+	    display: none;
+	}
+	.offcanvas.in {
+	    display: block;
+	}
+</style>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script type="text/javascript" src="http://67.227.189.112/~rtvnews24/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="http://67.227.189.112/~rtvnews24/assets/js/bootstrap-3.3.0.min.js"></script>
+<script type="text/javascript" src="http://67.227.189.112/~rtvnews24/assets/js/jasny-bootstrap.min.js"></script>
+<script type="text/javascript" src="http://67.227.189.112/~rtvnews24/assets/js/canvasjs.min.js"></script>
+<script type="text/javascript" src="http://67.227.189.112/~rtvnews24/assets/js/pie-chart.js"></script>
+<script type="text/javascript" src="http://67.227.189.112/~rtvnews24/assets/js/phoneticunicode.js"></script>
+<script type="text/javascript" src="http://67.227.189.112/~rtvnews24/assets/js/unijoy.js"></script>
+
+<script type="text/javascript" src="http://67.227.189.112/~rtvnews24/lib/opinion-poll/script.js"></script>
+<script type="text/javascript" src="http://67.227.189.112/~rtvnews24/assets/js/modernizr.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("ul.header_top_menu li").hover(
+
+		  
+		  function(){$(this).find('ul').stop(true, true).show(); },
+	  	  function (){$(this).find('ul').hide();}
+		  );
+		
+			});
+</script>
+
+<script type="text/javascript">
+	/**
+	 * MEGA MENU SUMMARY BLOCK FUNCTION
+	 */
+	function mega_menu_summary(cat_id,pid){
+		var URL = 'http://67.227.189.112/~rtvnews24/templates/rtv-v1/ajax/mega_menu_summary.php';
+			
+		// Load mega data summary
+		$.ajax({
+			url:URL,
+			type:"POST",
+			data:{cat_id:cat_id},
+			beforeSend:function(){
+				$('div.mega_list_block > #sub_mega_sum-'+pid).html('<div style="padding:10px; text-align:left">লোডিং...</div>');
+			},
+			success:function(msg){
+				$('div.mega_list_block > #sub_mega_sum-'+pid).html(msg);
+			},			 	
+			error:function(jqXHR, textStatus, errorMessage){
+			}			
+		});
+	}
+		
+	/**
+     * SEARCH FUNCTION
+     */
+    function google_search(srchInputElm){
+        var keyword = srchInputElm.val().trim().toLowerCase().replace(/\s/g,'+');
+        if(keyword==''){
+            srchInputElm.css({'background':'#FF9','color':'#444'}).focus()
+        }else{
+            var URL = 'http://67.227.189.112/~rtvnews24/search/google/?q='+keyword+'&cx='+encodeURIComponent('partner-pub-2223768610047094:1073516270')+'&cof='+encodeURIComponent('FORID:10')+'&ie=UTF-8&sa=Search';
+            window.location.href = URL;
+        }
+    }    
+	
+	$(function(){
+		/**
+		 * Mega Menu Dipslay
+		 */
+		$('div.mega_list_block > div.sub_mega_list > ul > li').hover(function(){			
+			if(!$(this).hasClass('active')){
+				var cat_id 	= $(this).attr('data-val');
+				var pid		= $(this).attr('parent-data');
+				$('div.mega_list_block > div.sub_mega_list > ul > li').removeClass('active');
+				$(this).addClass('active');
+				if(cat_id>0) mega_menu_summary(cat_id,pid);
+			}
+		});
+		
+		$('#menu_category > ul > li.mega_parent').hover(function(){			
+			/**
+			 * SETUP CURRECT POSITION
+			 */
+			// get the current position
+			var pos = $('div.mega_list_block',this).position();
+			// setup compare position
+			var com_pos = pos.left+450, limit_pos = 990;
+			if(com_pos>limit_pos){
+				var diff_pos = com_pos - limit_pos;
+				$('div.mega_list_block',this).css('margin-left','-'+diff_pos+'px');
+			}
+			
+			$('div.mega_list_block > div.sub_mega_list > ul > li').removeClass('active');
+			var cat_id 	= $('div.mega_list_block > div.sub_mega_list > ul > li:first-child',this).addClass('active').attr('data-val');
+			var pid 	= $('div.mega_list_block > div.sub_mega_list > ul > li:first-child',this).addClass('active').attr('parent-data');
+			if(cat_id>0) mega_menu_summary(cat_id,pid);
+		});
+		
+		/**
+		 * Corner news display
+		 */
+		var corner_index = 0;
+		var last_index = $('#top_content .top_corner_news > ul > li:last-child').index();
+
+		var corner_news_interval = setInterval(function(){
+			var cur_index = $('#top_content .top_corner_news > ul > li:visible').index();		
+			var nxt_index = cur_index + 1;
+			if(nxt_index>last_index) nxt_index = 0;
+			$('#top_content .top_corner_news > ul > li:eq('+(cur_index)+')').fadeOut();
+			$('#top_content .top_corner_news > ul > li:eq('+(nxt_index)+')').fadeIn();
+		},1000*5);
+		
+		/**
+		 * Breaking list section
+		 */
+		var brk_list_width = 0;
+		$('.headlines li').each(function(index, element) {
+           brk_list_width = brk_list_width + $(this).innerWidth() + 25;
+        });
+		//alert(total_hl_list_width);
+		$('.headlines ul').css('width',brk_list_width);
+		
+		/**
+		 * Healine list section
+		 */
+		var total_hl_list_width = 0;
+		$('.hl_list li').each(function(index, element) {
+           total_hl_list_width = total_hl_list_width + $(this).innerWidth() + 25;
+        });
+		//alert(total_hl_list_width);
+		$('.hl_list ul').css('width',total_hl_list_width);
+		
+		/**
+		 * Details page more reporter display
+		 */
+		$('#details_content .rpt_info_section > div.rpt_more').click(function(){
+			if($('i',this).hasClass('fa-arrow-circle-o-down')){
+				$('i',this).removeClass('fa-arrow-circle-o-down').addClass('fa-arrow-circle-o-up');
+				$('#details_content .rpt_info_section > div.rpt_more_list_block').slideDown();	
+			}else{
+				$('i',this).removeClass('fa-arrow-circle-o-up').addClass('fa-arrow-circle-o-down');
+				$('#details_content .rpt_info_section > div.rpt_more_list_block').slideUp();						
+			}
+		});
+		
+		/**
+		 * Details photo slider
+		 */
+		var cur_dtl_font_size = 15, dtl_font_low_limit = 15, dtl_font_high_limit = 30;
+		$('#details_content .smallFontIcon').click(function(){
+			if((cur_dtl_font_size - 1) >= dtl_font_low_limit){
+				cur_dtl_font_size 		= cur_dtl_font_size - 1;
+				var line_hght_size 		= cur_dtl_font_size + 4;
+				$('#details_content .dtl_section').css({
+					'font-size' 	: cur_dtl_font_size + 'px',
+					'line-height'	: line_hght_size + 'px'
+				});
+			}
+		});
+		
+		$('#details_content .bigFontIcon').click(function(){						
+			if((cur_dtl_font_size + 1) <= dtl_font_high_limit){
+				cur_dtl_font_size 		= cur_dtl_font_size + 1;
+				var line_hght_size 		= cur_dtl_font_size + 4;
+				$('#details_content .dtl_section').css({
+					'font-size' 	: cur_dtl_font_size + 'px',
+					'line-height'	: line_hght_size + 'px'
+				});
+			}
+		});
+				
+		$('#details_content .dtl_section > .dtl_img_section > ul > li.pre-photo').click(function(){						
+			var cur_photo_obj = $('#details_content .dtl_section > .dtl_img_section > ul > li.active');
+			var cur_photo_index = cur_photo_obj.index();			
+			var pre_photo_obj = $('#details_content .dtl_section > .dtl_img_section > ul > li.photo:nth-child('+(cur_photo_index)+')');
+			if(pre_photo_obj.hasClass('photo')){
+				$(cur_photo_obj).removeClass('active').fadeOut();
+				$(pre_photo_obj).addClass('active').fadeIn();
+			}else{
+				var album_url = $(this).attr('data-album-url');
+				window.location.href = album_url;
+			}
+		});
+		
+		$('#details_content .dtl_section > .dtl_img_section > ul > li.nxt-photo').click(function(){						
+			var cur_photo_obj = $('#details_content .dtl_section > .dtl_img_section > ul > li.active');
+			var cur_photo_index = cur_photo_obj.index();			
+			var nxt_photo_obj = $('#details_content .dtl_section > .dtl_img_section > ul > li.photo:nth-child('+(cur_photo_index+2)+')');
+			if(nxt_photo_obj.hasClass('photo')){				
+				$(cur_photo_obj).removeClass('active').fadeOut();
+				$(nxt_photo_obj).addClass('active').fadeIn();
+			}else{
+				var album_url = $(this).attr('data-album-url');
+				window.location.href = album_url;
+			}
+		});				
+		
+		/**
+		 * MOST VIEWED OR HITS DISPLAY SECTION
+		 */
+		$('.most_view_tab_block .second-layer .btn').click(function(){
+			var rpt_type = '';
+			if($('.most_view_tab_block .most_clicks').hasClass('active')){
+				if(!$(this).hasClass('active')){					
+					if($(this).hasClass('news')) var URL = 'http://67.227.189.112/~rtvnews24/templates/rtv-v1/ajax/most_viewed_news.php?cat_id=';
+					else if($(this).hasClass('videos')) var URL = 'http://67.227.189.112/~rtvnews24/templates/rtv-v1/ajax/most_viewed_videos.php';
+					else if($(this).hasClass('photos')) var URL = 'http://67.227.189.112/~rtvnews24/templates/rtv-v1/ajax/most_viewed_photos.php';
+					
+					$('.most_view_tab_block .second-layer .btn').removeClass('active');
+					$(this).addClass('active');
+					
+					if($('.most_view_tab_block .third-layer .btn.active').hasClass('todays')) var data = 'todays';
+					else if($('.most_view_tab_block .third-layer .btn.active').hasClass('one_month')) var data = 'one_month';
+					else if($('.most_view_tab_block .third-layer .btn.active').hasClass('three_month')) var data = 'three_month';
+					// Load cart data update			
+					$.ajax({
+						url:URL,
+						type:"POST",
+						data:{data:data},
+						beforeSend:function(){
+							$('.most_view_tab_block .most_viewed_display_block').html('<div style="padding:5px 0">লোডিং...</div>');
+						},
+						success:function(msg){
+							$('.most_view_tab_block .most_viewed_display_block').html(msg);
+						},			 	
+						error:function(jqXHR, textStatus, errorMessage){
+						}			
+					});
+				}
+			}
+		});
+		
+		$('.most_view_tab_block .third-layer .btn').click(function(){
+			var rpt_type = '';
+			if($('.most_view_tab_block .most_clicks').hasClass('active')){
+				if(!$(this).hasClass('active')){
+					
+					if($('.most_view_tab_block .second-layer .btn.active').hasClass('news')) var URL = 'http://67.227.189.112/~rtvnews24/templates/rtv-v1/ajax/most_viewed_news.php?cat_id=';
+					else if($('.most_view_tab_block .second-layer .btn.active').hasClass('videos')) var URL = 'http://67.227.189.112/~rtvnews24/templates/rtv-v1/ajax/most_viewed_videos.php';
+					else if($('.most_view_tab_block .second-layer .btn.active').hasClass('photos')) var URL = 'http://67.227.189.112/~rtvnews24/templates/rtv-v1/ajax/most_viewed_photos.php';
+						
+					if($(this).hasClass('todays')) var data = 'todays';
+					else if($(this).hasClass('one_month')) var data = 'one_month';
+					else if($(this).hasClass('three_month')) var data = 'three_month';
+
+					$('.most_view_tab_block .third-layer .btn').removeClass('active');
+					$(this).addClass('active');
+					
+					// Load cart data update			
+					$.ajax({
+						url:URL,
+						type:"POST",
+						data:{data:data},
+						beforeSend:function(){
+							$('.most_view_tab_block .most_viewed_display_block').html('<div style="padding:5px 0">লোডিং...</div>');
+						},
+						success:function(msg){
+							$('.most_view_tab_block .most_viewed_display_block').html(msg);
+						},			 	
+						error:function(jqXHR, textStatus, errorMessage){
+						}			
+					});
+					
+				}
+			}
+		});
+		
+		/**
+		 * MOBILE MENU BAR LINK
+		 */
+		if($("#mobile_header .cat_collapse_bar").is(':visible')){
+			
+			$("#mobile_header .cat_collapse_bar").click(function(){
+				$('#mobile_menu_category > div').slideToggle();
+			});
+			
+		}
+		
+		/**
+		 * FOOTER MORE LINK FOR MOBILE
+		 */
+		if($("#mobile_footer .footer-morelink-bar").is(':visible')){
+			
+			$("#mobile_footer .footer-morelink-bar").click(function(){
+				$('#mobile_footer .moreLinks').slideToggle();
+			});
+			
+		}
+		
+		/**
+		 * SEARCH BUTTON ACTION
+		 */
+		if($('#srch_keyword').is(':visible')){
+            var topSrchBtnInterval = '',top_btn_click_val = 0;
+            $('.top_srch_entry_type > .bn_entry_type').click(function(){
+                $('#srch_keyword').focus(); top_btn_click_val = 1;
+            });
+            $('#srch_keyword').on('focus',function(){
+                $('.top_srch_entry_type').show();
+            });
+            $('#srch_keyword').on('blur',function(){
+                var topSrchBtnInterval = setInterval(function(){
+                    if(top_btn_click_val==0){
+                        $('.top_srch_entry_type').hide();
+                    }else top_btn_click_val = 0;
+                    clearInterval(topSrchBtnInterval);
+                },200);
+            });
+            makePhoneticEditor('srch_keyword');
+            if($('#dtl_srch_keyword').is(':visible')) makePhoneticEditor('dtl_srch_keyword');
+        }
+		if($('.srch_keyword').is(':visible')){
+			$('.srch_btn').click(function(){
+		        google_search($('.srch_keyword'));
+		    });
+
+		    $('.srch_keyword').keypress(function(e) {
+		        var p = e.which;
+		        if(p==13) google_search($(this));
+		    });
+		}
+		
+		$('.bn_entry_type').click(function(){
+			$('.bn_entry_type').removeClass('active');
+			$(this).closest('.srch_form').find('input[name="q"]').focus();
+			if($(this).hasClass('unijoy')){
+				$('.bn_entry_type.unijoy').addClass('active');
+				makeUnijoyEditor('srch_keyword');
+				if($('#dtl_srch_keyword').is(':visible')) makeUnijoyEditor('dtl_srch_keyword');
+			}else if($(this).hasClass('phonetic')){
+				$('.bn_entry_type.phonetic').addClass('active');
+				makePhoneticEditor('srch_keyword');
+				if($('#dtl_srch_keyword').is(':visible')) makePhoneticEditor('dtl_srch_keyword');
+			}else if($(this).hasClass('english')){
+				$('.bn_entry_type.english').addClass('active');
+			}
+		});		
+		
+		/**
+		 * TOOLTIPS SETUP
+		 */
+		$(".tooltips").tooltip({placement : 'top'});
+		$(".tooltips-bottom").tooltip({placement : 'bottom'});		
+		
+		/*Home Page Photo Slider*/
+		var currentLeadNews = 1;
+		var totalLeadNews = $('.photo_slider_block .img a').length;
+		$('.pre_btn').click(function(){
+			
+			$('.photo_slider_block .img a:nth-child('+(currentLeadNews+1)+')').hide();
+			if(currentLeadNews==totalLeadNews)
+			{
+				var url = $('.photo_slider_block .album_title a').attr('href');
+				window.location = url;
+			}
+			if(currentLeadNews>1)
+			{
+				currentLeadNews = currentLeadNews - 1;
+				$('.photo_slider_block .img a:nth-child('+(currentLeadNews+1)+')').fadeIn(100);
+			}
+			else
+			{
+				currentLeadNews = 2;
+				$('.photo_slider_block .img a:nth-child('+(currentLeadNews+1)+')').fadeIn(100);
+			}
+		});
+		
+		$('.nxt_btn').click(function(){
+	
+			$('.photo_slider_block .img a:nth-child('+(currentLeadNews+1)+')').hide();
+			if(currentLeadNews==totalLeadNews)
+			{
+				var url = $('.photo_slider_block .album_title a').attr('href');
+				window.location = url;
+			}
+			if(currentLeadNews<totalLeadNews)
+			{
+				currentLeadNews = currentLeadNews + 1;
+				$('.photo_slider_block .img a:nth-child('+(currentLeadNews+1)+')').fadeIn(100);
+			}
+			else
+			{
+				currentLeadNews = 1;
+				$('.photo_slider_block .img a:nth-child('+(currentLeadNews+1)+')').fadeIn(100);
+			}
+		});
+		
+		/*Home Page Photo Slider*/
+		
+		/**
+		 * Poll section
+		 * Poll result display with pie-chart
+		 * parameters (dataClass,displayId,headerText,chartType[pie,doughnut],backgroundColor)
+		 */
+		$('input[name="poll_ans"]').click(function(){
+			$('.simple_poll .err_msg').fadeOut().html('');	
+		});
+		$('.simple_poll .poll_submit').click(function(){
+			var vote_index = $('input[name="poll_ans"]:checked').val();
+			if(vote_index>=0){
+				$('#poll_form').submit();
+			}else{
+				$('.simple_poll .err_msg').fadeIn().html('<i class="fa fa-info"></i>অনুগ্রহ করে আপনার পছন্দ নির্বাচন করুন।');
+			}
+		});
+		load_pie_chart('.poll_comp_data','pollCompChartContainer','','','#eee');
+		
+	});
+</script>
+
+</head>
+    
+    <body><center>
+        <div id="top_header"><style type="text/css">
+  .top_header_content .header_srch{position: relative}
+  .top_header_content .top_srch_entry_type{position: absolute; display: none; top: 24px; left: 0; z-index: 999}
+  .top_header_content .top_srch_entry_type span.bn_entry_type,span.bn_entry_type { padding: 5px 7px; background: #666; color: #fff; cursor: pointer}
+  .top_header_content .top_srch_entry_type span.bn_entry_type.active,span.bn_entry_type.active {background: #CD0000}
+  .top_header_content .srch_keyword{position: relative; display: inline-block; background: #fff; padding: 2px 5px; border: none;}
+  .top_header_content .srch_btn{cursor: pointer; background: #800000; padding: 4px 5px; margin-left: 5px; border: 1px solid #fff; color: #fff}
+  .top_header_content .bangla-font{
+    display: inline-block;
+    top: -2px;
+    position: relative;
+  }
+  .top_header_content a.archive{display:inline-block; padding:4px 15px; margin-top: 3px; cursor: pointer; background: #ccc; color: #333; font-size: 16px; text-shadow: 1px 0 #000;
+    border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; transition: all 0.4s;
+    -moz-transition: all 0.4s; -webkit-transition: all 0.4s;
+  }
+  .top_header_content .top_social_btn li{padding: 0 3px; float:left;}
+  .top_header_content .top_social_btn li a{
+      display: inline-block; margin: 2px;font-size: 20px; color:#fff;
+  }
+  .top_header_content .top_social_btn li a.gplus-link{
+      /*background: #DC4E41;
+	  color:#fff;*/
+  }
+  .top_header_content .top_social_btn li a.gplus-link:hover{
+	  background: #e64522;
+  }
+  .top_header_content .top_social_btn li a.fb-link{
+      /*background: #3B5998 !important*/
+  }
+  .top_header_content .top_social_btn li a.fb-link:hover{
+      background: #2b3990
+  }
+  .top_header_content .top_social_btn li a.twitter-link{
+      /*background: #55ACEE !important*/
+  }
+  .top_header_content .top_social_btn li a.twitter-link:hover{
+      background: #6fcff7
+  }
+  .top_header_content .top_social_btn li a.feed-link{
+      /*background: #f26522 !important*/
+  }
+  .top_header_content .top_social_btn li a.feed-link:hover{
+      background: #fb882b
+  }
+  .top_header_content .top_social_btn li a.pinterest-link:hover{
+      background: #cb2027
+  }
+  @media(max-width: 480px){    
+    .top_header_content .srch_form{
+      margin-top: 10px
+    }
+	.top_header_content .bangla-font{
+		float:right;
+	}
+  }
+</style>
+<div class="wrapper top_header_content">
+    <div class="row">
+        <div class="col-xs-12 col-md-5">
+            <div class="cur_date_desc">ঢাকা, বৃহস্পতিবার | ০৪ অাগস্ট ২০১৬ | ২০ শ্রাবণ ১৪২৩</div>
+        </div><!--end col-md-6-->
+                
+        <div class="col-xs-12 col-md-4">
+          <span class="header_srch srch_form">
+            <input class="bn-font srch_keyword" id="srch_keyword" name="q" placeholder="সার্চ" value="" />
+            <div class="top_srch_entry_type">
+              <span class="bn_entry_type unijoy tooltips-bottom" data-toggle="tooltip" data-placement="top" data-original-title="ইউনিজয়" onclick="switched=false;">অ</span>
+              <span class="bn_entry_type active phonetic tooltips-bottom" data-toggle="tooltip" data-placement="top" data-original-title="ফনেটিক" onclick="switched=false;">ফ</span>
+              <span class="bn_entry_type english eng-font tooltips-bottom" data-toggle="tooltip" data-placement="top" data-original-title="English" onclick="switched=true;">A</span>
+            </div>
+          <span>
+          <span><i class="fa fa-search srch_btn"></i></span>          
+
+          <span class="bangla-font"><a href="#"><img src="http://67.227.189.112/~rtvnews24/templates/rtv-v1/images/bangla-font.png" border="0" /></a></span>
+        </div><!--end col-md-4-->
+
+        <div class="col-xs-12 col-md-3"><ul class="list-inline top_social_btn">
+          <li><a class="fb-link" href="https://www.facebook.com/rtvonline" target="_blank"><i class="fa fa-facebook-square fa-lg"></i></a></li>
+          <li><a class="twitter-link" href="#" target="_blank"><i class="fa fa-twitter-square fa-lg"></i></a></li>
+          <li><a class="gplus-link" href="#" target="_blank"><i class="fa fa-google-plus-square fa-lg"></i></a></li>
+          <li><a class="youtube-link" href="#" target="_blank"><i class="fa fa-youtube-square fa-lg"></i></a></li>
+          <li><a class="linkedin-link" href="#" target="_blank"><i class="fa fa-linkedin-square fa-lg"></i></a></li>
+          <li><a class="pinterest-link" href="#" target="_blank"><i class="fa fa-pinterest-square fa-lg"></i></a></li>
+          <li><a class="feed-link" href="#" target="_blank"><i class="fa fa-rss-square fa-lg"></i></a></li>
+        </ul></div>
+    </div><!--end row-->
+
+</div><!--end top_header_content--></div><!--end top_header-->        
+        <div id="header"><div class="wrapper">
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+        	<div class="logoimg"><a href="http://67.227.189.112/~rtvnews24"><img src="http://67.227.189.112/~rtvnews24/templates/rtv-v1/images/main-logo.png" border="0" /></a></div>
+            <div class="visible-xs"><div class="adsSpace">Ad Space</div></div>
+        </div>
+        <div class="col-xs-12 col-md-9"></div>
+    </div>
+</div></div><!--end header-->
+
+        
+        <div class="container-fluid">
+            
+                            <div class="row visible-md visible-lg">
+                    <div id="menu_category"><ul class="list-inline header_top_menu"><li><a  href="http://67.227.189.112/~rtvnews24" title="Home"><i class="fa fa-home fa-lg"></i></a></li><li>
+				<a  href="http://67.227.189.112/~rtvnews24/bangladesh">বাংলাদেশ</a><ul class="header_hover_bottom_menu" style="display:none; margin:0; padding:0"><li class="first_sub_cat"><a  href="http://67.227.189.112/~rtvnews24/bangladesh/national">জাতীয়</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/national/politics">রাজনীতি</a></li></ul></li><li>
+				<a  href="http://67.227.189.112/~rtvnews24/country">দেশজুড়ে</a><ul class="header_hover_bottom_menu" style="display:none; margin:0; padding:0"><li class="first_sub_cat"><a  href="http://67.227.189.112/~rtvnews24/country/dhaka">ঢাকা</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/country/chittagong">চট্টগ্রাম</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/country/rajshahi">রাজশাহী</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/country/khulna">খুলনা</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/country/barisal">বরিশাল</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/country/sylhet">সিলেট</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/country/rangpur">রংপুর</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/country/mymensingh">ময়মনসিংহ</a></li></ul></li><li>
+				<a  href="http://67.227.189.112/~rtvnews24/international">আন্তর্জাতিক</a><ul class="header_hover_bottom_menu" style="display:none; margin:0; padding:0"><li class="first_sub_cat"><a  href="http://67.227.189.112/~rtvnews24/international/usa">যুক্তরাষ্ট্র</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/international/uk">যুক্তরাজ্য</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/international/india">ভারত</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/international/pakistan">পাকিস্তান</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/international/arab">আরব বিশ্ব</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/international/asia">এশিয়া</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/international/africa">আফ্রিকা</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/international/europe">ইউরোপ</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/international/australia">অস্ট্রেলিয়া</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/international/others">অন্যান্য</a></li></ul></li><li>
+				<a  href="http://67.227.189.112/~rtvnews24/economy">অর্থনীতি</a><ul class="header_hover_bottom_menu" style="display:none; margin:0; padding:0"><li class="first_sub_cat"><a  href="http://67.227.189.112/~rtvnews24/economy/share-market">শেয়ার বাজার</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/economy/banking">ব্যাংকিং</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/economy/insurance">বীমা</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/economy/industry">শিল্প</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/economy/agriclulure">কৃষি</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/economy/garments">পোষাক শিল্প</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/economy/import-export">আমদানি-রপ্তানি</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/economy/tourism">পর্যটন</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/economy/others">অন্যান্য</a></li></ul></li><li>
+				<a  href="http://67.227.189.112/~rtvnews24/sports">খেলাধুলা</a><ul class="header_hover_bottom_menu" style="display:none; margin:0; padding:0"><li class="first_sub_cat"><a  href="http://67.227.189.112/~rtvnews24/sports/cricket">ক্রিকেট</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/sports/football">ফুটবল</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/sports/others">অন্যান্য</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/sports/athletics">অ্যাথলেটিকস</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/sports/tenis">টেনিস</a></li></ul></li><li>
+				<a  href="http://67.227.189.112/~rtvnews24/entertainment">বিনোদন</a><ul class="header_hover_bottom_menu" style="display:none; margin:0; padding:0"><li class="first_sub_cat"><a  href="http://67.227.189.112/~rtvnews24/entertainment/dhallywood">ঢালিউড</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/entertainment/bollywood">বলিউড</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/entertainment/hollywood">হলিউড</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/entertainment/others">অন্যান্য</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/entertainment/drama">নাটক</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/entertainment/rtv">আরটিভি</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/entertainment/music-dance">সঙ্গীত ও নৃত্য</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/entertainment/stage">মঞ্চ</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/entertainment/celebrity">সেলিব্রেটি</a></li></ul></li><li>
+				<a  href="http://67.227.189.112/~rtvnews24/lifestyle">লাইফস্টাইল</a><ul class="header_hover_bottom_menu" style="display:none; margin:0; padding:0"><li class="first_sub_cat"><a  href="http://67.227.189.112/~rtvnews24/lifestyle/fashion">ফ্যাশন</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/lifestyle/beauty-tips">রূপচর্চা</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/lifestyle/travel">ভ্রমণ</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/lifestyle/consultation">পরামর্শ</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/lifestyle/food">খাবার</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/lifestyle/style">স্টাইল</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/lifestyle/interior">গৃহসজ্জা</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/lifestyle/others">অন্যান্য</a></li></ul></li><li>
+				<a  href="http://67.227.189.112/~rtvnews24/crime">অপরাধ</a></li><li>
+				<a  href="http://67.227.189.112/~rtvnews24/photo-gallery">ছবি</a></li><li>
+				<a  href="http://67.227.189.112/~rtvnews24/video-gallery">ভিডিও</a></li><li>
+				<a  href="http://67.227.189.112/~rtvnews24/others">অন্যান্য</a><ul class="header_hover_bottom_menu" style="display:none; margin:0; padding:0"><li><a class="lead_parent_cat" href="http://67.227.189.112/~rtvnews24/others">অন্যান্য</a></li><li class="first_sub_cat"><a  href="http://67.227.189.112/~rtvnews24/others/technology">তথ্যপ্রযুক্তি</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/others/health">স্বাস্থ্য</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/others/law-order">আইন-বিচার</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/others/education">ক্যাম্পাস</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/others/probash">প্রবাস</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/others/nature">পরিবেশ ও জীববৈচিত্র</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/others/religion">ধর্ম</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/others/interview">সাক্ষাৎকার</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/others/media">মিডিয়া</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/others/sufferings">জনদুর্ভোগ</a></li><li ><a  href="http://67.227.189.112/~rtvnews24/others/arts-literature">শিল্প-সাহিত্য</a></li></ul></li><li>
+				<a  href="http://67.227.189.112/~rtvnews24/archive">আর্কাইভ</a></li></ul><style type="text/css">
+	#menu_category.sticky{position: fixed; width: 100%; top: 0; z-index: 999}
+	
+	#menu_category ul.header_hover_bottom_menu{
+		position:absolute; display:block; width:100%;
+		background:#fff; font-size:15px; margin-left: 0;
+		border:1px solid #e5e5e5; list-style:none; left:0; top:30px; right:0;
+		z-index:9999;
+	}
+	#menu_category ul.header_hover_bottom_menu>li{
+		padding:0; /*display:table-cell;*/ text-align:center; white-space:nowrap; border-right:1px solid #e5e5e5; list-style:none; display:inline-block
+	}
+	#menu_category ul.header_hover_bottom_menu>li>a{
+		position:relative; display:block; padding:11px 15px; color:#000; /*text-shadow: 1px 0 #006699*/;
+	}
+	#menu_category ul.header_hover_bottom_menu>li>a:hover{
+		background: #C4161C; color: #fff;
+	}	
+</style>
+	
+<script type="text/javascript">
+	var navpos = $('#menu_category').offset();
+	
+	$(window).bind('scroll', function() {
+	  if ($(window).scrollTop() > navpos.top) {
+	    $('#menu_category').addClass('wrapper sticky');
+	   }
+	   else {
+	     $('#menu_category').removeClass('wrapper sticky');
+	   }
+	});
+</script>
+</div><!--end menu_category-->
+                </div><!--end menu_category row-->
+                        
+            <!--<div class="row just_now_block"></div>-->
+                                
+                        
+            <div class="row">
+                <div id="main_content"></div><!--end main_content-->
+            </div><!--end main_content row-->
+            
+        </div>
+        <div id="footer"><style type="text/css">
+	#top_footer{position: relative; background: #2c4b9c/*019bdb*/ ; height: 43px}
+	#top_footer .footer_logo{position: absolute; left: 47%; width: 80px; z-index: 1000}
+	#top_footer .right_bg{position: absolute; background: #c4161c/*ed1c24*/; left: 50%; width: 50%; height: 100%; z-index: 99}
+	#top_footer p,#bottom_footer p{margin : 3px 0px}
+	#top_footer .top_footer_left_block{padding: 20px 0}
+	#top_footer .top_footer_right_block{padding: 20px 0}
+	#top_footer .footer_cat_list a{display: block; text-align: left; padding: 5px 0; font-size: 16px; text-shadow:1px 0px #666;}
+	#bottom_footer ul{margin: 0}
+	#bottom_footer ul li > a.android{color: #a4c639}
+	#bottom_footer ul li > a.windows{color: #00bcf2}
+	#bottom_footer .social_block{margin-top: 7px; padding: 10px}
+	#bottom_footer .social_block li > a{
+		display:block; background: #666; color: #fff;
+		width: 30px; height: 30px; /*border-radius: 50%; -moz-border-radius:50%; -webkit-border-radius:50%;*/
+	}
+	#bottom_footer .social_block ul{margin: 0}
+	#bottom_footer .social_block li > a.fb-link{background: #3B5998}
+	#bottom_footer .social_block li > a.twitter-link{background: #55ACEE}
+	#bottom_footer .social_block li > a.gplus-link{background: #DC4E41}
+	#bottom_footer .social_block li > a.youtube-link{background: #333333}
+	#bottom_footer .social_block li > a.linkedin-link{background: #0077B5}
+	#bottom_footer .social_block li > a.pinterest-link{background: #bd081c}
+	#bottom_footer .social_block li > a.feed-link{background: #f26522}
+	#bottom_footer .social_block li > a > i{position: relative; top: 5px}
+	#bottom_footer .dev_block{display: table; margin-top: 7px; font-size: 14px; font-weight: bold; color: #777}
+	#bottom_footer .dev_block span{display: table-cell; vertical-align: middle}
+	#bottom_footer{background: #f7f7f7; padding: 20px; border-bottom: 1px solid #ccc}
+	
+	#mn_footer{position: relative; overflow:hidden;}
+	.mnfoo{ border-top:1px solid #ddd; padding:10px 0;}
+	.mnfoo li{ padding:0 10px; border-right:1px solid #ddd;}
+	.mnfoo li a{ color:#000;}
+	.mnfoo li a:hover{ color:#03710b}
+	.mnfoo li:last-child{ border-right:none;}
+	
+	@media (max-width:640px){
+		#bottom_footer{padding: 10px 0px;}
+		#top_footer .footer_logo{left: 36%;}
+	}
+	
+</style>
+<div id="mn_footer">
+	<div class="wrapper"><ul class="list-inline mnfoo" style="margin:0;"><li><a  href="http://67.227.189.112/~rtvnews24" title="Home"><i class="fa fa-home fa-lg"></i></a></li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/others/law-order">আইন-বিচার</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/others/sufferings">জনদুর্ভোগ</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/exclusive">এক্সক্লুসিভ</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/others/technology">তথ্যপ্রযুক্তি</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/others/probash">প্রবাস</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/kids">কিডস</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/others/education">ক্যাম্পাস</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/others/health">স্বাস্থ্য</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/feature">ফিচার</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/free-opinion">মুক্তমত</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/others">অন্যান্য</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/templates/rtv-v1/ajax/about-us"target="_blank">আমাদের কথা</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/templates/rtv-v1/ajax/terms-policy"target="_blank">নিয়ম-নীতি</a>
+					</li><li>
+					<a  href="http://67.227.189.112/~rtvnews24/templates/rtv-v1/ajax/contact-us"target="_blank">যোগাযোগ</a>
+					</li></ul>    </div>
+</div>
+<div class="clearfix"></div>
+<div id="top_footer">
+	<div class="footer_logo" align="center"><a href="http://67.227.189.112/~rtvnews24"><img src="http://67.227.189.112/~rtvnews24/templates/rtv-v1/images/logo_bot.jpg" width="100%" height="43px" border="0" /></a></div>
+	<div class="right_bg"></div>
+</div><!--end top_footer-->
+
+<div id="bottom_footer">
+	<div class="wrapper">	
+		<div class="row">
+			<div class="col-xs-12 col-md-7" align="left"><div class="row">
+   <div class="col-sm-4">
+      <p style="font-size:14px">প্রকাশক: হুমায়ুন কবীর বাবলু</p>
+      <p style="font-size:14px">প্রধান সম্পাদক: সৈয়দ আশিক রহমান</p>
+      <p style="font-size:14px">নির্বাহী সম্পাদক: আনোয়ার হক</p>
+   </div>
+   <div class="col-sm-4">
+      <p style="font-size:14px">বেঙ্গল মিডিয়া কর্পোরেশন লিমিটেড</p>
+      <p style="font-size:14px">১০২ কাজী নজরুল ইসলাম এভিনিউ</p>
+      <p style="font-size:14px">কারওয়ান বাজার, ঢাকা-১২১৫</p>
+   </div>
+   <div class="col-sm-4">
+      <p style="font-size:14px">ফোন : +৮৮০-২-৫৫০১৩৫১১ - ১৫</p>
+      <p style="font-size:14px">ফ্যাক্স : +৮৮০-২-৯১৩০৮৭৯ - ৮০</p>
+      <p style="font-size:14px">ই-মেইল : <a href="mailto:news@rtvonline.com">news@rtvonline.com</a></p>
+   </div>
+</div></div>
+			<div class="col-xs-12 col-md-5"><div class="top_footer_right_block">
+				<div><ul class="list-inline">
+                	<li><a class="apple" href="http://67.227.189.112/~rtvnews24/archive" title="ARCHIVE"><i class="fa fa-archive fa-2x"></i></a></li>
+					<li><a class="android" href="#"><i class="fa fa-android fa-2x"></i></a></li>
+					<li><a class="apple" href="#"><i class="fa fa-apple fa-2x"></i></a></li>
+					<li><a class="windows" href="#"><i class="fa fa-windows fa-2x"></i></a></li>	
+				</ul></div>
+				<div class="social_block"><ul class="list-inline">
+					<li><a class="fb-link" href="https://www.facebook.com/rtvonline" target="_blank"><i class="fa fa-facebook fa-md"></i></a></li>					<li><a class="twitter-link" href="#" target="_blank"><i class="fa fa-twitter fa-md"></i></a></li>					                    <li><a class="youtube-link" href="#" target="_blank"><i class="fa fa-youtube fa-md"></i></a></li>                    <li><a class="linkedin-link" href="#" target="_blank"><i class="fa fa-linkedin fa-md"></i></a></li>										<li><a class="feed-link" href="#" target="_blank"><i class="fa fa-rss fa-md"></i></a></li>				</ul></div>
+				<!--<div class="dev_block eng-font">
+					<span>Developed by : </span>
+					<span><a href="http://www.orangebd.com/" target="_blank"><img src="http://67.227.189.112/~rtvnews24/templates/rtv-v1/images/orangebd.png" border="" /></a></span>
+				</div>-->
+			</div><!--end top_footer_right_block--></div>
+		</div>		
+	</div>
+</div><!--bottom_footer-->
+<div align="center" style="background: #2c4b9c; padding:5px 0; font-size: 15px; color: #fff">© সর্বস্বত্ব স্বত্বাধিকার সংরক্ষিত ২০১৬ | এই ওয়েবসাইটের কোনো লেখা, ছবি, ভিডিও অনুমতি ছাড়া ব্যবহার বেআইনি</div></div><!--end footer-->
+        	</center></body>        
+
+<!-- Mirrored from 67.227.189.112/~rtvnews24/templates/rtv-v1/ajax/most_viewed_news.php?cat_id=54 by HTTrack Website Copier/3.x [XR&CO'2008], Thu, 04 Aug 2016 08:12:37 GMT -->
+</html>
